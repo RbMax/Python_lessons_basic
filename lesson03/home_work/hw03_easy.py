@@ -5,7 +5,11 @@
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
 
 def my_round(number, ndigits):
-    pass
+    scale = 10 ** ndigits             # 10^5 = 1000000 коэф. на который домножим число, чтобы получить нужное кол-во цифр в числе
+    num_round = number * scale + 0.5  # 212346.17 добавляем 0,5, чтобы откорректировать разряд в будущем преобразовании в инт
+    num = int(num_round)              # 212346 оставлям целю часть
+    result = num/scale                # получаем итоговый результат
+    return result                     # возвращаем результат
 
 
 print(my_round(2.1234567, 5))
@@ -19,9 +23,21 @@ print(my_round(2.9999967, 5))
 # Билет считается счастливым, если сумма его первых и последних цифр равны.
 # !!!P.S.: функция не должна НИЧЕГО print'ить
 
+
 def lucky_ticket(ticket_number):
     pass
+    ticket = str(ticket_number)
+    if len(ticket) != 6:
+        return False
 
+    return _get_sum(ticket[:3]) == _get_sum(ticket[3:])
+
+
+def _get_sum(part):
+    result = 0
+    for i in part:
+        result += int(i)
+    return result
 
 print(lucky_ticket(123006))
 print(lucky_ticket(12321))
